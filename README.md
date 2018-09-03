@@ -41,58 +41,6 @@
   - [28 Python2和3的区别](#28-python2和3的区别)
   - [29 super init](#29-super-init)
   - [30 range and xrange](#30-range-and-xrange)
-- [操作系统](#操作系统)
-  - [1 select,poll和epoll](#1-selectpoll和epoll)
-  - [2 调度算法](#2-调度算法)
-  - [3 死锁](#3-死锁)
-  - [4 程序编译与链接](#4-程序编译与链接)
-    - [1 预处理](#1-预处理)
-    - [2 编译](#2-编译)
-    - [3 汇编](#3-汇编)
-    - [4 链接](#4-链接)
-  - [5 静态链接和动态链接](#5-静态链接和动态链接)
-  - [6 虚拟内存技术](#6-虚拟内存技术)
-  - [7 分页和分段](#7-分页和分段)
-    - [分页与分段的主要区别](#分页与分段的主要区别)
-  - [8 页面置换算法](#8-页面置换算法)
-  - [9 边沿触发和水平触发](#9-边沿触发和水平触发)
-- [数据库](#数据库)
-  - [1 事务](#1-事务)
-  - [2 数据库索引](#2-数据库索引)
-  - [3 Redis原理](#3-redis原理)
-    - [Redis是什么？](#redis是什么)
-    - [Redis数据库](#redis数据库)
-    - [Redis缺点](#redis缺点)
-  - [4 乐观锁和悲观锁](#4-乐观锁和悲观锁)
-  - [5 MVCC](#5-mvcc)
-    - [<a href="http://lib.csdn.net/base/mysql">MySQL</a>的innodb引擎是如何实现MVCC的](#mysql的innodb引擎是如何实现mvcc的)
-  - [6 MyISAM和InnoDB](#6-myisam和innodb)
-- [网络](#网络)
-  - [1 三次握手](#1-三次握手)
-  - [2 四次挥手](#2-四次挥手)
-  - [3 ARP协议](#3-arp协议)
-  - [4 urllib和urllib2的区别](#4-urllib和urllib2的区别)
-  - [5 Post和Get](#5-post和get)
-  - [6 Cookie和Session](#6-cookie和session)
-  - [7 apache和nginx的区别](#7-apache和nginx的区别)
-  - [8 网站用户密码保存](#8-网站用户密码保存)
-  - [9 HTTP和HTTPS](#9-http和https)
-  - [10 XSRF和XSS](#10-xsrf和xss)
-  - [11 幂等 Idempotence](#11-幂等-idempotence)
-  - [12 RESTful架构(SOAP,RPC)](#12-restful架构soaprpc)
-  - [13 SOAP](#13-soap)
-  - [14 RPC](#14-rpc)
-  - [15 CGI和WSGI](#15-cgi和wsgi)
-  - [16 中间人攻击](#16-中间人攻击)
-  - [17 c10k问题](#17-c10k问题)
-  - [18 socket](#18-socket)
-  - [19 浏览器缓存](#19-浏览器缓存)
-  - [20 HTTP1.0和HTTP1.1](#20-http10和http11)
-  - [21 Ajax](#21-ajax)
-- [*NIX](#nix)
-  - [unix进程间通信方式(IPC)](#unix进程间通信方式ipc)
-- [数据结构](#数据结构)
-  - [1 红黑树](#1-红黑树)
 - [编程题](#编程题)
   - [1 台阶问题/斐波那契](#1-台阶问题斐波那契)
   - [2 变态台阶问题](#2-变态台阶问题)
@@ -117,6 +65,8 @@
   - [21 单链表逆置](#21-单链表逆置)
   - [22 两个字符串是否是变位词](#22-两个字符串是否是变位词)
   - [23 动态规划问题](#23-动态规划问题)
+  - [24 单例模式](#24-单例模式)
+  - [25 super函数的原理](#25-super函数的原理)
 
 <!-- markdown-toc end -->
 
@@ -229,7 +179,7 @@ a=A()
 
 **类变量：**
 
-> ​	是可在类的所有实例之间共享的值（也就是说，它们不是单独分配给每个实例的）。例如下例中，num_of_instance 就是类变量，用于跟踪存在着多少个Test 的实例。
+> 	是可在类的所有实例之间共享的值（也就是说，它们不是单独分配给每个实例的）。例如下例中，num_of_instance 就是类变量，用于跟踪存在着多少个Test 的实例。
 
 **实例变量：**
 
@@ -522,7 +472,7 @@ ps: `__metaclass__`是创建类时起作用.所以我们可以分别使用`__met
 
 ## 16 单例模式
 
-> ​	单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例类的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。
+> 	单例模式是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例类的特殊类。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。
 >
 > `__new__()`在`__init__()`之前被调用，用于生成实例对象。利用这个方法和类的属性的特点可以实现设计模式的单例模式。单例模式是指创建唯一对象，单例模式设计的类只能实例
 > **这个绝对常考啊.绝对要记住1~2个方法,当时面试官是让手写的.**
@@ -1426,3 +1376,172 @@ class Anagram:
 
 > 可参考：[动态规划(DP)的整理-Python描述](http://blog.csdn.net/mrlevo520/article/details/75676160)
 
+## 24 单例模式
+
+方法一:可以使用__new__方法
+
+在__new__方法中把类实例绑定到类变量_instance上，如果cls._instance为None表示该类还没有实例化过，实例化该类并返回。如果cls_instance不为None表示该类已实例化，直接返回cls_instance
+
+```python
+class SingleTon(object):
+   def __new__(cls,*args,**kwargs):
+       if not hasattr(cls,'_instance'):
+           cls._instance = object.__new__(cls,*args,**kwargs)
+       return cls._instance
+class TestClass(SingleTon):
+   a = 1
+
+test1 = TestClass()
+test2 = TestClass()
+print (test1.a,test2.a)
+
+test1.a=2
+print (test1.a,test2.a)
+print (id(test1),id(test2))
+```
+
+
+
+方法二:使用装饰器,建立过实例的就放到instances里面,下次建立的时候先检查里面有没有
+
+```python
+def SingleTon(cls,*args,**kwargs):
+   instances = {}
+   print (instances)
+   def _singleton():
+       if cls not in instances:
+           instances[cls] = cls(*args,**kwargs)
+       print (instances)
+       return instances[cls]
+   return _singleton
+
+@SingleTon
+class LastClass(object):
+   a = 1
+test1 = LastClass()
+print (test1.a)
+test2 = LastClass()
+print (test2.a)
+```
+
+
+
+方法三:使用__metaclass__(元类)关于元类看看这个吧:http://blog.jobbole.com/21351/
+
+```python
+class SignalTon(type):
+   def __init__(cls,name,bases,dict):
+       super(SignalTon, cls).__init__(name,bases,dict)
+       cls._instance = None
+
+   def __call__(cls, *args, **kwargs):
+       if cls._instance is None:
+           cls._instance = super(SignalTon,cls).__call__(*args,**kwargs)
+       return cls._instance
+
+class TestClass(object):
+   __metaclass__ = SignalTon
+
+test1 = TestClass()
+test2 = TestClass()
+
+test1.a = 2
+print (test1.a,test2.a)
+print (id(test1),id(test2))
+```
+
+
+
+方法四:共享属性
+
+所谓单例就是所有的引用（实例，对象）拥有相同的属性和方法，同一个类的实例天生都会有相同的方法，那我们只需要保证同一个类所产生的实例都具有相同的属性。所有实例共享属性最简单直接的方法就是共享__dict__属性指向。
+
+```python
+class SingleTon(object):
+   _state = {}
+   def __new__(cls, *args, **kwargs):
+       obj = object.__new__(cls,*args,**kwargs)
+       obj.__dict__ = cls._state
+       return obj
+
+class TestClass(SingleTon):
+   a = 1
+
+test1 = TestClass()
+test2 = TestClass()
+print (test1.a,test2.a)
+test1.a = 2
+print (test1.a,test2.a)
+print (id(test1),id(test2))
+```
+
+
+
+方法五:使用同一个模版，写在mysingleton.py中
+
+```python
+class My_Singleton(object):
+   def foo(self):
+       pass
+
+my_singleton = My_Singleton()
+
+#写在要使用这个实例的py文件里面,在不同的引用的地方都引用相同的实例,以此实现单例模式
+from mysingleton import my_singleton
+my_singleton.foo()
+```
+
+## 25 super函数的原理
+
+```python
+#阅读下面的代码，它的输出结果是什么？
+class A(object):
+ def __init__(self):
+  print ("enter A")
+  super(A, self).__init__()  # new
+  print ("leave A")
+
+class B(object):
+ def __init__(self):
+  print ("enter B")
+  super(B, self).__init__()  # new
+  print ("leave B")
+
+class C(A):
+ def __init__(self):
+  print ("enter C")
+  super(C, self).__init__()
+  print ("leave C")
+
+class D(A):
+ def __init__(self):
+  print ("enter D")
+  super(D, self).__init__()
+  print ("leave D")
+class E(B, C):
+ def __init__(self):
+  print ("enter E")
+  super(E, self).__init__()  # change
+  print ("leave E")
+
+class F(E, D):
+ def __init__(self):
+  print ("enter F")
+  super(F, self).__init__()  # change
+  print ("leave F")
+
+#输出
+
+enter F
+enter E
+enter B
+enter C
+enter D
+enter A
+leave A
+leave D
+leave C
+leave B
+leave E
+leave F
+```
