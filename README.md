@@ -41,6 +41,9 @@
   - [28 Python2和3的区别](#28-python2和3的区别)
   - [29 super init](#29-super-init)
   - [30 range and xrange](#30-range-and-xrange)
+  - [31 单线程+异步I/O](#31-单线程+异步i/o)
+  - [32 Django](#32-django)
+  - [33 爬虫](#33-爬虫)
 - [编程题](#编程题)
   - [1 台阶问题/斐波那契](#1-台阶问题斐波那契)
   - [2 变态台阶问题](#2-变态台阶问题)
@@ -718,6 +721,59 @@ What is the difference between range and xrange functions in Python 2.X?
  xrange is a sequence object that evaluates lazily.
 
 http://stackoverflow.com/questions/94935/what-is-the-difference-between-range-and-xrange-functions-in-python-2-x
+
+## 31 单线程+异步I/O
+
+- 现代操作系统对I/O操作的改进中最为重要的就是支持异步I/O。如果充分利用操作系统提供的异步I/O支持，就可以用单进程单线程模型来执行多任务，这种全新的模型称为事件驱动模型。Nginx就是支持异步I/O的Web服务器，它在单核CPU上采用单进程模型就可以高效地支持多任务。在多核CPU上，可以运行多个进程（数量与CPU核心数相同），充分利用多核CPU。用Node.js开发的服务器端程序也使用了这种工作模式，这也是当下实现多任务编程的一种趋势。
+
+- 在Python语言中，单线程+异步I/O的编程模型称为协程，有了协程的支持，就可以基于事件驱动编写高效的多任务程序。协程最大的优势就是极高的执行效率，因为子程序切换不是线程切换，而是由程序自身控制，因此，没有线程切换的开销。协程的第二个优势就是不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不用加锁，只需要判断状态就好了，所以执行效率比多线程高很多。如果想要充分利用CPU的多核特性，最简单的方法是多进程+协程，既充分利用多核，又充分发挥协程的高效率，可获得极高的性能。
+
+- 协程通过`yield`关键字和 `send()`操作来转移执行权，协程之间不是调用者与被调用者的关系。 
+
+- 协程的优势在于以下两点：
+
+  1. 执行效率极高，因为子程序（函数）切换不是线程切换，由程序自身控制，没有切换线程的开销。
+  2. 不需要多线程的锁机制，因为只有一个线程，也不存在竞争资源的问题，当然也就不需要对资源加锁保护，因此执行效率高很多。
+
+  > 说明：协程适合处理的是I/O密集型任务，处理CPU密集型任务并不是它的长处，如果要提升CPU的利用率可以考虑“多进程+协程”的模式。
+  >
+  >
+
+## 32 Django
+
+- 创建一个Django项目
+  - mkdir oa
+  - cd oa
+  - python3 -m venv venv
+  - source venv/bin/activate
+  - django-admin startproject oa .
+  - python manage.py runserver
+- 视图模板
+  - templates
+    - index.html
+  - 项目目录/views.py
+  - settings.py
+    - 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+
+## 33 爬虫
+
+- 步骤
+  - 设定抓取目标（种子页面）并获取网页。
+  - 当服务器无法访问时，设置重试次数。
+  - 在需要的时候设置用户代理（否则无法访问页面）。
+  - 对获取的页面进行必要的解码操作。
+  - 通过正则表达式获取页面中的链接。
+  - 对链接进行进一步的处理（获取页面并重复上面的动作）。
+  - 将有用的信息进行持久化（以备后续的处理）。
+- 工具
+  - 下载数据 - urllib / requests / aiohttp。
+  - 解析数据 - re / lxml / beautifulsoup4（bs4）/ pyquery。
+  - 缓存和持久化 - pymysql / redis / sqlalchemy / peewee / pymongo。
+  - 生成摘要 - hashlib。
+  - 序列化和压缩 - pickle / json / zlib。
+  - 调度器 - 进程 / 线程 / 协程。
+
+- 推荐大家阅读[《Python并行编程》](http://python-parallel-programmning-cookbook.readthedocs.io/zh_CN/latest/index.html)。 
 
 # 编程题
 
